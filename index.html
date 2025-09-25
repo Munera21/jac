@@ -17,6 +17,14 @@
             background-clip: text;
             color: transparent;
         }
+        .form-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .form-container.active {
+            max-height: 500px; /* Ajusta este valor según la altura de tu formulario */
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-100 antialiased">
@@ -107,7 +115,7 @@
                             </ul>
                         </div>
                         <div class="mt-6 text-center">
-                            <a href="https://wa.me/573165127979" target="_blank" class="bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300">Agenda tu cita</a>
+                            <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan Básico (Motos)">Agenda tu cita</button>
                         </div>
                     </div>
                     <!-- Plan Premium -->
@@ -124,7 +132,7 @@
                             </ul>
                         </div>
                         <div class="mt-6 text-center">
-                            <a href="https://wa.me/573165127979" target="_blank" class="bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300">Agenda tu cita</a>
+                            <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan Premium (Motos)">Agenda tu cita</button>
                         </div>
                     </div>
                     <!-- Plan VIP -->
@@ -140,7 +148,7 @@
                             </ul>
                         </div>
                         <div class="mt-6 text-center">
-                            <a href="https://wa.me/573165127979" target="_blank" class="bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300">Agenda tu cita</a>
+                            <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan VIP (Motos)">Agenda tu cita</button>
                         </div>
                     </div>
                     <!-- Plan VIP Proximidad -->
@@ -156,7 +164,7 @@
                             </ul>
                         </div>
                         <div class="mt-6 text-center">
-                            <a href="https://wa.me/573165127979" target="_blank" class="bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300">Agenda tu cita</a>
+                            <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan VIP Proximidad (Motos)">Agenda tu cita</button>
                         </div>
                     </div>
                 </div>
@@ -179,7 +187,7 @@
                             </ul>
                         </div>
                         <div class="mt-6 text-center">
-                            <a href="https://wa.me/573165127979" target="_blank" class="bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300">Agenda tu cita</a>
+                            <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan Básico (Autos)">Agenda tu cita</button>
                         </div>
                     </div>
                     <!-- Plan Premium Automóvil -->
@@ -196,7 +204,7 @@
                             </ul>
                         </div>
                         <div class="mt-6 text-center">
-                            <a href="https://wa.me/573165127979" target="_blank" class="bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300">Agenda tu cita</a>
+                            <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan Premium (Autos)">Agenda tu cita</button>
                         </div>
                     </div>
                 </div>
@@ -214,6 +222,9 @@
                         <li>Página de monitoreo</li>
                         <li>Control T de carga</li>
                     </ul>
+                </div>
+                <div class="mt-6 text-center">
+                    <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan Empresas de Carga">Agenda tu cita</button>
                 </div>
             </div>
             
@@ -236,10 +247,42 @@
                         </li>
                     </ul>
                 </div>
+                <div class="mt-6 text-center">
+                    <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Accesorios">Agenda tu cita</button>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Modal del formulario de cita -->
+    <div id="modal-form" class="fixed inset-0 z-50 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-gray-800 p-8 rounded-xl shadow-2xl max-w-lg w-full mx-4">
+            <h3 class="text-2xl font-bold text-white mb-4">Agenda tu cita</h3>
+            <form id="agendar-form" class="space-y-4">
+                <div>
+                    <label for="modal-nombre" class="block text-sm font-medium text-gray-300">Nombre completo</label>
+                    <input type="text" id="modal-nombre" name="nombre" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                </div>
+                <div>
+                    <label for="modal-vehiculo" class="block text-sm font-medium text-gray-300">Marca y modelo del vehículo</label>
+                    <input type="text" id="modal-vehiculo" name="vehiculo" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                </div>
+                <div>
+                    <label for="modal-plan" class="block text-sm font-medium text-gray-300">Plan de Interés</label>
+                    <input type="text" id="modal-plan" name="plan" readonly class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm">
+                </div>
+                <div>
+                    <label for="modal-fecha" class="block text-sm font-medium text-gray-300">Fecha de instalación</label>
+                    <input type="date" id="modal-fecha" name="fecha" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="cerrar-modal" class="bg-gray-700 text-white font-semibold py-2 px-6 rounded-md shadow-md hover:bg-gray-600 transition duration-300">Cerrar</button>
+                    <button type="submit" class="bg-orange-500 text-white font-semibold py-2 px-6 rounded-md shadow-lg hover:bg-orange-600 transition duration-300">Enviar por WhatsApp</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
     <!-- Sección de Servicios Principales -->
     <section id="servicios-main" class="bg-gray-800 py-16">
         <div class="container mx-auto px-4">
@@ -364,39 +407,47 @@
     </footer>
 
     <script>
-        // Lógica para el menú móvil
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
+        // Envuelve todo el código de JavaScript en el evento `DOMContentLoaded`.
+        // Esto asegura que el código solo se ejecute cuando toda la página HTML esté cargada,
+        // previniendo errores de "Script error" o "Cannot read properties of null".
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lógica para el menú móvil
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Ocultar el menú móvil al hacer clic en un enlace
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Ocultar el menú al cambiar el tamaño de la pantalla
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 768) {
-                mobileMenu.classList.add('hidden');
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
             }
-        });
 
-        // Lógica para el envío del formulario a WhatsApp
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Evita que el formulario se envíe de la forma tradicional
+            // Ocultar el menú móvil al hacer clic en un enlace
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
 
-            const nombre = document.getElementById('nombre').value;
-            const email = document.getElementById('email').value;
-            const vehiculo = document.getElementById('vehiculo').value;
-            const plan = document.getElementById('plan').value;
-            const whatsappNumber = '573165127979'; // El número de WhatsApp
+            // Ocultar el menú al cambiar el tamaño de la pantalla
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
 
-            const message = `¡Hola! 👋 Quiero agendar mi instalación de GPS.
+            // Lógica para el envío del formulario a WhatsApp
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Evita que el formulario se envíe de la forma tradicional
+
+                    const nombre = document.getElementById('nombre').value;
+                    const email = document.getElementById('email').value;
+                    const vehiculo = document.getElementById('vehiculo').value;
+                    const plan = document.getElementById('plan').value;
+                    const whatsappNumber = '573165127979'; // El número de WhatsApp
+
+                    const message = `¡Hola! 👋 Quiero agendar mi instalación de GPS.
 
 Mis datos son:
 Nombre: ${nombre}
@@ -406,27 +457,477 @@ Plan de Interés: ${plan}
 
 Espero tu confirmación. ¡Muchas gracias!`;
 
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-            
-            window.open(whatsappUrl, '_blank');
-        });
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                    
+                    window.open(whatsappUrl, '_blank');
+                });
+            }
 
-        // Lógica para el control de volumen del video
-        const video = document.getElementById('hero-video');
-        const volumeToggle = document.getElementById('volume-toggle');
-        const volumeOnIcon = document.getElementById('volume-on-icon');
-        const volumeOffIcon = document.getElementById('volume-off-icon');
+            // Lógica para el control de volumen del video
+            const video = document.getElementById('hero-video');
+            const volumeToggle = document.getElementById('volume-toggle');
+            const volumeOnIcon = document.getElementById('volume-on-icon');
+            const volumeOffIcon = document.getElementById('volume-off-icon');
 
-        volumeToggle.addEventListener('click', () => {
-            video.muted = !video.muted;
-            if (video.muted) {
-                volumeOnIcon.classList.add('hidden');
-                volumeOffIcon.classList.remove('hidden');
-            } else {
-                volumeOnIcon.classList.remove('hidden');
-                volumeOffIcon.classList.add('hidden');
+            if (video && volumeToggle && volumeOnIcon && volumeOffIcon) {
+                volumeToggle.addEventListener('click', () => {
+                    video.muted = !video.muted;
+                    if (video.muted) {
+                        volumeOnIcon.classList.add('hidden');
+                        volumeOffIcon.classList.remove('hidden');
+                    } else {
+                        volumeOnIcon.classList.remove('hidden');
+                        volumeOffIcon.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Lógica para mostrar los formularios al hacer clic en un botón de plan
+            const agendarBtns = document.querySelectorAll('.agendar-btn');
+            const modalForm = document.getElementById('modal-form');
+            const cerrarModalBtn = document.getElementById('cerrar-modal');
+            const modalPlanInput = document.getElementById('modal-plan');
+            const modalFechaInput = document.getElementById('modal-fecha');
+
+            agendarBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const plan = btn.dataset.plan;
+                    if (modalPlanInput && modalForm && modalFechaInput) {
+                        modalPlanInput.value = plan;
+                        modalForm.classList.remove('hidden');
+                        
+                        // Actualiza la fecha para que no se puedan seleccionar días pasados
+                        const today = new Date();
+                        const year = today.getFullYear();
+                        const month = (today.getMonth() + 1).toString().padStart(2, '0');
+                        const day = today.getDate().toString().padStart(2, '0');
+                        modalFechaInput.min = `${year}-${month}-${day}`;
+                    }
+                });
+            });
+
+            if (cerrarModalBtn && modalForm) {
+                cerrarModalBtn.addEventListener('click', () => {
+                    modalForm.classList.add('hidden');
+                });
+            }
+
+            // Lógica para enviar el formulario a WhatsApp desde el modal
+            const agendarForm = document.getElementById('agendar-form');
+            if (agendarForm) {
+                agendarForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const nombre = document.getElementById('modal-nombre').value;
+                    const vehiculo = document.getElementById('modal-vehiculo').value;
+                    const plan = document.getElementById('modal-plan').value;
+                    const fecha = document.getElementById('modal-fecha').value;
+                    const whatsappNumber = '573165127979';
+
+                    const message = `¡Hola! 👋 Quiero agendar una instalación.
+
+Mis datos son:
+Nombre: ${nombre}
+Vehículo: ${vehiculo}
+Plan de Interés: ${plan}
+Fecha de Instalación: ${fecha}
+
+Espero tu confirmación. ¡Muchas gracias!`;
+                    
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                    
+                    if (modalForm) {
+                        modalForm.classList.add('hidden');
+                    }
+                });
             }
         });
     </script>
+    
+    <!-- Sección de Servicios Principales -->
+    <section id="servicios-main" class="bg-gray-800 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">Nuestros Servicios Principales</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tarjeta de servicio 1 -->
+                <div class="bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-orange-500 text-5xl mb-4 text-center">🛰️</div>
+                    <h3 class="text-2xl font-bold text-white mb-2 text-center">Rastreo y Monitoreo</h3>
+                    <p class="text-gray-300 text-center">
+                        Sistema de última generación con tecnología 4G. Ubicación en tiempo real, alertas y historial de recorridos.
+                    </p>
+                </div>
+                <!-- Tarjeta de servicio 2 -->
+                <div class="bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-orange-500 text-5xl mb-4 text-center">🔧</div>
+                    <h3 class="text-2xl font-bold text-white mb-2 text-center">Instalación Profesional</h3>
+                    <p class="text-gray-300 text-center">
+                        Instalación clara y correcta, difícil de acceder para los malhechores. Sin pérdida de la garantía eléctrica de tu vehículo.
+                    </p>
+                </div>
+                <!-- Tarjeta de servicio 3 -->
+                <div class="bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-orange-500 text-5xl mb-4 text-center">👮</div>
+                    <h3 class="text-2xl font-bold text-white mb-2 text-center">Equipo de Reacción Local</h3>
+                    <p class="text-gray-300 text-center">
+                        Equipo de reacción inmediata de Pitalito en engranaje con la Policía Nacional. ¡Accionamos más rápido!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Por qué elegirnos -->
+    <section class="bg-gray-800 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">¿Por qué JAC GPS?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <!--  -->
+                    <img src="https://placehold.co/600x400/0A0A0A/F97316?text=EQUIPO+JAC+GPS" alt="Equipo de JAC GPS" class="rounded-xl shadow-xl">
+                </div>
+                <div>
+                    <ul class="space-y-4 text-lg text-gray-300">
+                        <li class="flex items-center space-x-3"><span class="text-orange-500">✓</span> <span>**Tecnología de punta:** GPS con precisión militar y tecnología 4G.</span></li>
+                        <li class="flex items-center space-x-3"><span class="text-orange-500">✓</span> <span>**Soporte humano local:** Conexión directa con la Policía Nacional en Pitalito para una respuesta inmediata.</span></li>
+                        <li class="flex items-center space-x-3"><span class="text-orange-500">✓</span> <span>**Sin pagos mensuales:** Olvídate de recargas o mensualidades. (Excepto para clientes empresariales).</span></li>
+                        <li class="flex items-center space-x-3"><span class="text-orange-500">✓</span> <span>**7 años de experiencia y 99% de efectividad:** Un equipo de confianza con resultados comprobados.</span></li>
+                        <li class="flex items-center space-x-3"><span class="text-orange-500">✓</span> <span>**Garantía y Acompañamiento:** Garantía en el equipo y acompañamiento en caso de hurto.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección de Demostración -->
+    <section id="demostracion" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Demostración en Video</h2>
+            <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                Mira en acción nuestra tecnología y descubre cómo protegemos tu vehículo. En este video, puedes ver los beneficios de nuestro GPS para motos, desde la instalación hasta el monitoreo.
+            </p>
+            <a href="https://www.facebook.com/share/r/1A6Ac3qmrU/" target="_blank" class="inline-block bg-orange-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">
+                Ver video en Facebook
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-6">Agenda tu Instalación</h2>
+            <p class="text-lg text-center text-gray-300 mb-8 max-w-2xl mx-auto">
+                ¡Cupos limitados por día! Agenda hoy y paga el día de la instalación.
+            </p>
+            <div class="bg-gray-800 p-8 rounded-xl shadow-md max-w-lg mx-auto">
+                 <form id="contactForm" class="space-y-4">
+                    <div>
+                        <label for="nombre" class="block text-sm font-medium text-gray-300">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-300">Correo electrónico</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label for="vehiculo" class="block text-sm font-medium text-gray-300">Marca y modelo del vehículo</label>
+                        <input type="text" id="vehiculo" name="vehiculo" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label for="plan" class="block text-sm font-medium text-gray-300">Plan de Interés</label>
+                        <select id="plan" name="plan" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                            <option value="">Selecciona un plan</option>
+                            <option value="Planes de Motos - Básico">Plan Básico (Motos)</option>
+                            <option value="Planes de Motos - Premium">Plan Premium (Motos)</option>
+                            <option value="Planes de Motos - VIP">Plan VIP (Motos)</option>
+                            <option value="Planes de Motos - VIP Proximidad">Plan VIP Proximidad (Motos)</option>
+                            <option value="Planes para Automóviles - Básico">Plan Básico (Autos)</option>
+                            <option value="Planes para Automóviles - Premium">Plan Premium (Autos)</option>
+                            <option value="Plan Empresas de Carga">Plan Empresas de Carga</option>
+                            <option value="Botón Inmovilizador">Botón Inmovilizador (Accesorio)</option>
+                            <option value="Alarma de Movimiento y de Golpe">Alarma de Movimiento y de Golpe (Accesorio)</option>
+                            <option value="Alarma con Sensor de Proximidad">Alarma con Sensor de Proximidad (Accesorio)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-orange-500 text-white font-semibold py-3 px-6 rounded-md shadow-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">
+                        Separar Cita
+                    </button>
+                </form>
+            </div>
+            <div class="mt-8 text-center text-gray-300">
+                <p>Estamos Ubicados en 📍: Cra 1 # 4-52, B/Los Lagos, Segundo piso, Pitalito SEGURO.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página (Footer) -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 JAC GPS. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Envuelve todo el código de JavaScript en el evento `DOMContentLoaded`.
+        // Esto asegura que el código solo se ejecute cuando toda la página HTML esté cargada,
+        // previniendo errores de "Script error" o "Cannot read properties of null".
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lógica para el menú móvil
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Ocultar el menú móvil al hacer clic en un enlace
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Ocultar el menú al cambiar el tamaño de la pantalla
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+
+            // Lógica para el envío del formulario a WhatsApp
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Evita que el formulario se envíe de la forma tradicional
+
+                    const nombre = document.getElementById('nombre').value;
+                    const email = document.getElementById('email').value;
+                    const vehiculo = document.getElementById('vehiculo').value;
+                    const plan = document.getElementById('plan').value;
+                    const whatsappNumber = '573165127979'; // El número de WhatsApp
+
+                    const message = `¡Hola! 👋 Quiero agendar mi instalación de GPS.
+
+Mis datos son:
+Nombre: ${nombre}
+Correo electrónico: ${email}
+Vehículo: ${vehiculo}
+Plan de Interés: ${plan}
+
+Espero tu confirmación. ¡Muchas gracias!`;
+
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                    
+                    window.open(whatsappUrl, '_blank');
+                });
+            }
+
+            // Lógica para el control de volumen del video
+            const video = document.getElementById('hero-video');
+            const volumeToggle = document.getElementById('volume-toggle');
+            const volumeOnIcon = document.getElementById('volume-on-icon');
+            const volumeOffIcon = document.getElementById('volume-off-icon');
+
+            if (video && volumeToggle && volumeOnIcon && volumeOffIcon) {
+                volumeToggle.addEventListener('click', () => {
+                    video.muted = !video.muted;
+                    if (video.muted) {
+                        volumeOnIcon.classList.add('hidden');
+                        volumeOffIcon.classList.remove('hidden');
+                    } else {
+                        volumeOnIcon.classList.remove('hidden');
+                        volumeOffIcon.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Lógica para mostrar los formularios al hacer clic en un botón de plan
+            const agendarBtns = document.querySelectorAll('.agendar-btn');
+            const modalForm = document.getElementById('modal-form');
+            const cerrarModalBtn = document.getElementById('cerrar-modal');
+            const modalPlanInput = document.getElementById('modal-plan');
+            const modalFechaInput = document.getElementById('modal-fecha');
+
+            agendarBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const plan = btn.dataset.plan;
+                    if (modalPlanInput && modalForm && modalFechaInput) {
+                        modalPlanInput.value = plan;
+                        modalForm.classList.remove('hidden');
+                        
+                        // Actualiza la fecha para que no se puedan seleccionar días pasados
+                        const today = new Date();
+                        const year = today.getFullYear();
+                        const month = (today.getMonth() + 1).toString().padStart(2, '0');
+                        const day = today.getDate().toString().padStart(2, '0');
+                        modalFechaInput.min = `${year}-${month}-${day}`;
+                    }
+                });
+            });
+
+            if (cerrarModalBtn && modalForm) {
+                cerrarModalBtn.addEventListener('click', () => {
+                    modalForm.classList.add('hidden');
+                });
+            }
+
+            // Lógica para enviar el formulario a WhatsApp desde el modal
+            const agendarForm = document.getElementById('agendar-form');
+            if (agendarForm) {
+                agendarForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const nombre = document.getElementById('modal-nombre').value;
+                    const vehiculo = document.getElementById('modal-vehiculo').value;
+                    const plan = document.getElementById('modal-plan').value;
+                    const fecha = document.getElementById('modal-fecha').value;
+                    const whatsappNumber = '573165127979';
+
+                    const message = `¡Hola! 👋 Quiero agendar una instalación.
+
+Mis datos son:
+Nombre: ${nombre}
+Vehículo: ${vehiculo}
+Plan de Interés: ${plan}
+Fecha de Instalación: ${fecha}
+
+Espero tu confirmación. ¡Muchas gracias!`;
+                    
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                    
+                    if (modalForm) {
+                        modalForm.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+    
+    <!-- Sección de Servicios Principales -->
+    <section id="servicios-main" class="bg-gray-800 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">Nuestros Servicios Principales</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tarjeta de servicio 1 -->
+                <div class="bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-orange-500 text-5xl mb-4 text-center">🛰️</div>
+                    <h3 class="text-2xl font-bold text-white mb-2 text-center">Rastreo y Monitoreo</h3>
+                    <p class="text-gray-300 text-center">
+                        Sistema de última generación con tecnología 4G. Ubicación en tiempo real, alertas y historial de recorridos.
+                    </p>
+                </div>
+                <!-- Tarjeta de servicio 2 -->
+                <div class="bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-orange-500 text-5xl mb-4 text-center">🔧</div>
+                    <h3 class="text-2xl font-bold text-white mb-2 text-center">Instalación Profesional</h3>
+                    <p class="text-gray-300 text-center">
+                        Instalación clara y correcta, difícil de acceder para los malhechores. Sin pérdida de la garantía eléctrica de tu vehículo.
+                    </p>
+                </div>
+                <!-- Tarjeta de servicio 3 -->
+                <div class="bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-orange-500 text-5xl mb-4 text-center">👮</div>
+                    <h3 class="text-2xl font-bold text-white mb-2 text-center">Equipo de Reacción Local</h3>
+                    <p class="text-gray-300 text-center">
+                        Equipo de reacción inmediata de Pitalito en engranaje con la Policía Nacional. ¡Accionamos más rápido!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Por qué elegirnos -->
+    <section class="bg-gray-800 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">¿Por qué JAC GPS?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <!--  -->
+                    <img src="https://placehold.co/600x400/0A0A0A/F97316?text=EQUIPO+JAC+GPS" alt="Equipo de JAC GPS" class="rounded-xl shadow-xl">
+                </div>
+                <div>
+                    <ul class="space-y-4 text-lg text-gray-300">
+                        <li class="flex items-center space-x-3"><span class="text-orange-500">✓</span> <span>**Tecnología de punta:** GPS con precisión militar y tecnología 4G.</span></li>
+                        <li class="flex items-center space-x-3"><span class="text-orange-500">✓</span> <span>**Soporte humano local:** Conexión directa con la Policía Nacional en Pitalito para una respuesta inmediata.</span></li>
+                        <li class="flex items-center space-x-3"><span class="text-orange-500">✓</span> <span>**Sin pagos mensuales:** Olvídate de recargas o mensualidades. (Excepto para clientes empresariales).</span></li>
+                        <li class="flex items-center space-x-3"><span class="text-orange-500">✓</span> <span>**7 años de experiencia y 99% de efectividad:** Un equipo de confianza con resultados comprobados.</span></li>
+                        <li class="flex items-center space-x-3"><span class="text-orange-500">✓</span> <span>**Garantía y Acompañamiento:** Garantía en el equipo y acompañamiento en caso de hurto.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección de Demostración -->
+    <section id="demostracion" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Demostración en Video</h2>
+            <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                Mira en acción nuestra tecnología y descubre cómo protegemos tu vehículo. En este video, puedes ver los beneficios de nuestro GPS para motos, desde la instalación hasta el monitoreo.
+            </p>
+            <a href="https://www.facebook.com/share/r/1A6Ac3qmrU/" target="_blank" class="inline-block bg-orange-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">
+                Ver video en Facebook
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-6">Agenda tu Instalación</h2>
+            <p class="text-lg text-center text-gray-300 mb-8 max-w-2xl mx-auto">
+                ¡Cupos limitados por día! Agenda hoy y paga el día de la instalación.
+            </p>
+            <div class="bg-gray-800 p-8 rounded-xl shadow-md max-w-lg mx-auto">
+                 <form id="contactForm" class="space-y-4">
+                    <div>
+                        <label for="nombre" class="block text-sm font-medium text-gray-300">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-300">Correo electrónico</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label for="vehiculo" class="block text-sm font-medium text-gray-300">Marca y modelo del vehículo</label>
+                        <input type="text" id="vehiculo" name="vehiculo" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label for="plan" class="block text-sm font-medium text-gray-300">Plan de Interés</label>
+                        <select id="plan" name="plan" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                            <option value="">Selecciona un plan</option>
+                            <option value="Planes de Motos - Básico">Plan Básico (Motos)</option>
+                            <option value="Planes de Motos - Premium">Plan Premium (Motos)</option>
+                            <option value="Planes de Motos - VIP">Plan VIP (Motos)</option>
+                            <option value="Planes de Motos - VIP Proximidad">Plan VIP Proximidad (Motos)</option>
+                            <option value="Planes para Automóviles - Básico">Plan Básico (Autos)</option>
+                            <option value="Planes para Automóviles - Premium">Plan Premium (Autos)</option>
+                            <option value="Plan Empresas de Carga">Plan Empresas de Carga</option>
+                            <option value="Botón Inmovilizador">Botón Inmovilizador (Accesorio)</option>
+                            <option value="Alarma de Movimiento y de Golpe">Alarma de Movimiento y de Golpe (Accesorio)</option>
+                            <option value="Alarma con Sensor de Proximidad">Alarma con Sensor de Proximidad (Accesorio)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-orange-500 text-white font-semibold py-3 px-6 rounded-md shadow-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">
+                        Separar Cita
+                    </button>
+                </form>
+            </div>
+            <div class="mt-8 text-center text-gray-300">
+                <p>Estamos Ubicados en 📍: Cra 1 # 4-52, B/Los Lagos, Segundo piso, Pitalito SEGURO.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página (Footer) -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 JAC GPS. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 </body>
 </html>
