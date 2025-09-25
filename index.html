@@ -57,12 +57,23 @@
                 JAC GPS: <span class="text-gradient">Tecnología y Seguridad</span> en tus manos
             </h1>
             <!-- Contenedor del video -->
-            <div class="mt-8 mb-8">
-                <video class="w-full rounded-xl shadow-lg" autoplay loop playsinline>
+            <div class="relative mt-8 mb-8">
+                <video id="hero-video" class="w-full rounded-xl shadow-lg" autoplay loop muted playsinline>
                     <!-- El enlace del video de Cloudinary ha sido corregido aquí -->
                     <source src="https://res.cloudinary.com/dwad3m99i/video/upload/v1758830727/AQMDPOzZAaonk4oviGtFidgJUI8T13jBlvefBIuRMvPnwNV7BHju0oFsbilbO4oVThmphWUswWV-GRjhZmvwfVYp6G45OAGNXHZ98Cw_bleiza.mp4" type="video/mp4">
                     Tu navegador no soporta el video.
                 </video>
+                <!-- Botón de control de volumen -->
+                <button id="volume-toggle" class="absolute bottom-4 right-4 bg-gray-900 bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75 transition-all">
+                    <!-- Icono de altavoz silenciado -->
+                    <svg id="volume-off-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M9.383 3.093A1 1 0 0110 3v14a1 1 0 01-1.707.707L5.454 13.5a1 1 0 00-.707-.293H3a1 1 0 01-1-1v-4a1 1 0 011-1h1.747a1 1 0 00.707-.293l2.843-2.843a1 1 0 011.086-.271zM14.47 7.027a1 1 0 011.066.892 5 5 0 010 4.162 1 1 0 01-1.066.892 7 7 0 00-6.491-6.491z" clip-rule="evenodd"></path>
+                    </svg>
+                    <!-- Icono de altavoz normal (inicialmente oculto) -->
+                    <svg id="volume-on-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M9.383 3.093A1 1 0 0110 3v14a1 1 0 01-1.707.707L5.454 13.5a1 1 0 00-.707-.293H3a1 1 0 01-1-1v-4a1 1 0 011-1h1.747a1 1 0 00.707-.293l2.843-2.843a1 1 0 011.086-.271zM14.47 7.027a1 1 0 011.066.892 5 5 0 010 4.162 1 1 0 01-1.066.892 7 7 0 00-6.491-6.491z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
             </div>
             <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
                 Especialistas en instalación de GPS y alarmas en Pitalito y otras partes de Colombia: Fusagasugá, Medellín y Cali.
@@ -397,6 +408,23 @@ Espero tu confirmación. ¡Muchas gracias!`;
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
             
             window.open(whatsappUrl, '_blank');
+        });
+
+        // Lógica para el control de volumen del video
+        const video = document.getElementById('hero-video');
+        const volumeToggle = document.getElementById('volume-toggle');
+        const volumeOnIcon = document.getElementById('volume-on-icon');
+        const volumeOffIcon = document.getElementById('volume-off-icon');
+
+        volumeToggle.addEventListener('click', () => {
+            video.muted = !video.muted;
+            if (video.muted) {
+                volumeOnIcon.classList.add('hidden');
+                volumeOffIcon.classList.remove('hidden');
+            } else {
+                volumeOnIcon.classList.remove('hidden');
+                volumeOffIcon.classList.add('hidden');
+            }
         });
     </script>
 </body>
