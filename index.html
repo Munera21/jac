@@ -26,24 +26,9 @@
         .form-container.active {
             max-height: 500px;
         }
-        #cursor-arrow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            pointer-events: none;
-            transition: transform 0.1s ease-out;
-        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-100 antialiased">
-
-    <!-- Flecha dinámica -->
-    <div id="cursor-arrow" class="text-orange-500 hidden md:block">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transform -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-    </div>
 
     <!-- Sección de la cabecera (Header) -->
     <header class="bg-gray-800 shadow-lg p-6 sticky top-0 z-50">
@@ -197,5 +182,100 @@
             <p>&copy; 2024 JAC GPS. Todos los derechos reservados.</p>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lógica para el menú móvil
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 768) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Lógica para el control de volumen del video
+            const video = document.getElementById('hero-video');
+            const volumeToggle = document.getElementById('volume-toggle');
+            const volumeOnIcon = document.getElementById('volume-on-icon');
+            const volumeOffIcon = document.getElementById('volume-off-icon');
+            if (video && volumeToggle && volumeOnIcon && volumeOffIcon) {
+                volumeToggle.addEventListener('click', () => {
+                    video.muted = !video.muted;
+                    if (video.muted) {
+                        volumeOnIcon.classList.add('hidden');
+                        volumeOffIcon.classList.remove('hidden');
+                    } else {
+                        volumeOnIcon.classList.remove('hidden');
+                        volumeOffIcon.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Lógica para mostrar los formularios al hacer clic en un botón de plan
+            const agendarBtns = document.querySelectorAll('.agendar-btn');
+            const modalForm = document.getElementById('modal-form');
+            const cerrarModalBtn = document.getElementById('cerrar-modal');
+            const modalPlanInput = document.getElementById('modal-plan');
+            const modalFechaInput = document.getElementById('modal-fecha');
+
+            if (agendarBtns.length > 0 && modalForm && cerrarModalBtn && modalPlanInput && modalFechaInput) {
+                agendarBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const plan = btn.dataset.plan;
+                        modalPlanInput.value = plan;
+                        modalForm.classList.remove('hidden');
+                        
+                        const today = new Date();
+                        const year = today.getFullYear();
+                        const month = (today.getMonth() + 1).toString().padStart(2, '0');
+                        const day = today.getDate().toString().padStart(2, '0');
+                        modalFechaInput.min = `${year}-${month}-${day}`;
+                    });
+                });
+
+                cerrarModalBtn.addEventListener('click', () => {
+                    modalForm.classList.add('hidden');
+                });
+
+                document.getElementById('agendar-form').addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const nombre = document.getElementById('modal-nombre').value;
+                    const vehiculo = document.getElementById('modal-vehiculo').value;
+                    const plan = document.getElementById('modal-plan').value;
+                    const fecha = document.getElementById('modal-fecha').value;
+                    const whatsappNumber = '573165127979';
+
+                    const message = `¡Hola! 👋 Quiero agendar una instalación.
+
+Mis datos son:
+Nombre: ${nombre}
+Vehículo: ${vehiculo}
+Plan de Interés: ${plan}
+Fecha de Instalación: ${fecha}
+
+Espero tu confirmación. ¡Muchas gracias!`;
+                    
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                    
+                    modalForm.classList.add('hidden');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
