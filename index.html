@@ -18,15 +18,28 @@
             background-clip: text;
             color: transparent;
         }
-        .form-container {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out;
+        .modal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .form-container.active {
-            max-height: 500px;
+        .modal-container.active {
+            opacity: 1;
+            visibility: visible;
         }
     </style>
+    <!-- Incluye Font Awesome para iconos de redes sociales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="bg-gray-900 text-gray-100 antialiased">
 
@@ -67,7 +80,7 @@
             </h1>
             <!-- Contenedor del video -->
             <div class="relative mt-8 mb-8">
-                <video id="hero-video" class="w-full rounded-xl shadow-lg" autoplay loop muted playsinline>
+                <video id="hero-video" class="w-3/4 mx-auto rounded-xl shadow-lg max-w-4xl" autoplay loop muted playsinline>
                     <source src="https://res.cloudinary.com/dwad3m99i/video/upload/v1758830727/AQMDPOzZAaonk4oviGtFidgJUI8T13jBlvefBIuRMvPnwNV7BHju0oFsbilbO4oVThmphWUswWV-GRjhZmvwfVYp6G45OAGNXHZ98Cw_bleiza.mp4" type="video/mp4">
                     Tu navegador no soporta el video.
                 </video>
@@ -131,7 +144,6 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">¿Por qué JAC GPS?</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <!--  -->
                     <img src="https://placehold.co/600x400/0A0A0A/F97316?text=EQUIPO+JAC+GPS" alt="Equipo de JAC GPS" class="rounded-xl shadow-xl">
                 </div>
                 <div>
@@ -159,19 +171,58 @@
             </a>
         </div>
     </section>
-
-    <!-- Sección de Cómo llegar -->
+    
+    <!-- Sección de Contacto -->
     <section id="contacto" class="py-16 bg-gray-900">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">¿Cómo Llegar?</h2>
-            <p class="text-lg text-center text-gray-300 mb-8 max-w-2xl mx-auto">
-                Visítanos en nuestra oficina en Pitalito.
-            </p>
-            <a id="map-button" href="https://www.google.com/maps/dir/?api=1&destination=1.848048,-76.043760&travelmode=driving" target="_blank" class="block w-full">
-                <img src="https://placehold.co/1200x600/1e293b/fff?text=Click+para+abrir+Google+Maps" alt="Mapa de ubicación de JAC GPS" class="w-full rounded-xl shadow-lg">
-            </a>
-            <div class="mt-8 text-center text-gray-300">
-                <p>Estamos Ubicados en 📍: Cra 1 # 4-52, B/Los Lagos, Segundo piso, Pitalito SEGURO.</p>
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-6">Contáctanos</h2>
+            <div class="bg-gray-800 p-8 rounded-xl shadow-2xl mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center md:text-left">
+                    <!-- Información de contacto -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-orange-500 mb-4">Información</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-center justify-center md:justify-start space-x-3">
+                                <i class="fas fa-phone-alt text-lg text-white"></i>
+                                <a href="tel:+573165127979" class="text-lg text-gray-300 hover:text-white transition-colors">+57 316 5127979</a>
+                            </li>
+                            <li class="flex items-center justify-center md:justify-start space-x-3">
+                                <i class="fas fa-envelope text-lg text-white"></i>
+                                <a href="mailto:jac_gps@example.com" class="text-lg text-gray-300 hover:text-white transition-colors">jac_gps@example.com</a>
+                            </li>
+                            <li class="flex items-center justify-center md:justify-start space-x-3">
+                                <i class="fab fa-whatsapp text-lg text-white"></i>
+                                <a href="https://wa.me/573165127979?text=Hola,%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios." target="_blank" class="text-lg text-gray-300 hover:text-white transition-colors">WhatsApp</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Redes sociales -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-orange-500 mb-4">Nuestras Redes</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-center justify-center md:justify-start space-x-3">
+                                <i class="fab fa-instagram text-lg text-white"></i>
+                                <a href="https://www.instagram.com/jac_gps/" target="_blank" class="text-lg text-gray-300 hover:text-white transition-colors">Instagram</a>
+                            </li>
+                            <li class="flex items-center justify-center md:justify-start space-x-3">
+                                <i class="fab fa-facebook-square text-lg text-white"></i>
+                                <a href="https://www.facebook.com/jacgpspitalito" target="_blank" class="text-lg text-gray-300 hover:text-white transition-colors">Facebook</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de ¿Cómo Llegar? -->
+            <div class="text-center text-gray-300">
+                <h3 class="text-3xl font-bold text-white mb-6">¿Cómo Llegar?</h3>
+                <p class="text-lg text-gray-300 mb-4">Haz clic en el mapa para abrir Google Maps y obtener las indicaciones.</p>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=1.848048,-76.043760" target="_blank" class="block w-full">
+                    <img src="8D464B06-48CB-41CF-A442-599335B4CD89.PNG" alt="Mapa de JAC GPS" class="w-full rounded-xl shadow-lg">
+                </a>
+                <div class="mt-8 text-center text-gray-300">
+                    <p>Estamos Ubicados en 📍: Cra 1 # 4-52, B/Los Lagos, Segundo piso, Pitalito SEGURO.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -203,76 +254,6 @@
                     if (window.innerWidth >= 768) {
                         mobileMenu.classList.add('hidden');
                     }
-                });
-            }
-
-            // Lógica para el control de volumen del video
-            const video = document.getElementById('hero-video');
-            const volumeToggle = document.getElementById('volume-toggle');
-            const volumeOnIcon = document.getElementById('volume-on-icon');
-            const volumeOffIcon = document.getElementById('volume-off-icon');
-            if (video && volumeToggle && volumeOnIcon && volumeOffIcon) {
-                volumeToggle.addEventListener('click', () => {
-                    video.muted = !video.muted;
-                    if (video.muted) {
-                        volumeOnIcon.classList.add('hidden');
-                        volumeOffIcon.classList.remove('hidden');
-                    } else {
-                        volumeOnIcon.classList.remove('hidden');
-                        volumeOffIcon.classList.add('hidden');
-                    }
-                });
-            }
-
-            // Lógica para mostrar los formularios al hacer clic en un botón de plan
-            const agendarBtns = document.querySelectorAll('.agendar-btn');
-            const modalForm = document.getElementById('modal-form');
-            const cerrarModalBtn = document.getElementById('cerrar-modal');
-            const modalPlanInput = document.getElementById('modal-plan');
-            const modalFechaInput = document.getElementById('modal-fecha');
-
-            if (agendarBtns.length > 0 && modalForm && cerrarModalBtn && modalPlanInput && modalFechaInput) {
-                agendarBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const plan = btn.dataset.plan;
-                        modalPlanInput.value = plan;
-                        modalForm.classList.remove('hidden');
-                        
-                        const today = new Date();
-                        const year = today.getFullYear();
-                        const month = (today.getMonth() + 1).toString().padStart(2, '0');
-                        const day = today.getDate().toString().padStart(2, '0');
-                        modalFechaInput.min = `${year}-${month}-${day}`;
-                    });
-                });
-
-                cerrarModalBtn.addEventListener('click', () => {
-                    modalForm.classList.add('hidden');
-                });
-
-                document.getElementById('agendar-form').addEventListener('submit', function(event) {
-                    event.preventDefault();
-
-                    const nombre = document.getElementById('modal-nombre').value;
-                    const vehiculo = document.getElementById('modal-vehiculo').value;
-                    const plan = document.getElementById('modal-plan').value;
-                    const fecha = document.getElementById('modal-fecha').value;
-                    const whatsappNumber = '573165127979';
-
-                    const message = `¡Hola! 👋 Quiero agendar una instalación.
-
-Mis datos son:
-Nombre: ${nombre}
-Vehículo: ${vehiculo}
-Plan de Interés: ${plan}
-Fecha de Instalación: ${fecha}
-
-Espero tu confirmación. ¡Muchas gracias!`;
-                    
-                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-                    window.open(whatsappUrl, '_blank');
-                    
-                    modalForm.classList.add('hidden');
                 });
             }
         });
