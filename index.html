@@ -26,9 +26,24 @@
         .form-container.active {
             max-height: 500px;
         }
+        #cursor-arrow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            pointer-events: none;
+            transition: transform 0.1s ease-out;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-100 antialiased">
+
+    <!-- Flecha dinámica -->
+    <div id="cursor-arrow" class="text-orange-500 hidden md:block">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transform -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+    </div>
 
     <!-- Sección de la cabecera (Header) -->
     <header class="bg-gray-800 shadow-lg p-6 sticky top-0 z-50">
@@ -41,7 +56,7 @@
                 <ul class="flex space-x-4 items-center">
                     <li><a href="#inicio" class="text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Inicio</a></li>
                     <li><a href="servicios.html" class="text-gray-300 hover:text-orange-500 transition duration-300 font-semibold" target="_blank">Servicios</a></li>
-                    <li><a href="#planes" class="text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Planes</a></li>
+                    <li><a href="planes.html" class="text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Planes</a></li>
                     <li><a href="#contacto" class="bg-orange-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-orange-600 transition duration-300">Contacto</a></li>
                 </ul>
             </nav>
@@ -55,7 +70,7 @@
     <div id="mobile-menu" class="hidden md:hidden bg-gray-800 shadow-md p-4 space-y-2">
         <a href="#inicio" class="block text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Inicio</a>
         <a href="servicios.html" class="block text-gray-300 hover:text-orange-500 transition duration-300 font-semibold" target="_blank">Servicios</a>
-        <a href="#planes" class="block text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Planes</a>
+        <a href="planes.html" class="block text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Planes</a>
         <a href="#contacto" class="block text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Contacto</a>
     </div>
 
@@ -92,197 +107,6 @@
         </div>
     </main>
 
-    <!-- Sección de Planes (En la portada) -->
-    <section id="planes" class="py-16 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">Nuestros Planes y Accesorios</h2>
-
-            <!-- Sección de Planes de Motos -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-white mb-6">Planes de Motos</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Promoción especial -->
-                    <div class="bg-gradient-to-r from-orange-500 to-yellow-500 p-8 rounded-xl shadow-2xl flex flex-col justify-between transform scale-105">
-                        <div class="text-center text-white">
-                            <h4 class="text-2xl font-bold mb-2">Promoción Especial</h4>
-                            <p class="text-4xl font-extrabold mb-2">$330.000</p>
-                            <p class="text-sm font-semibold text-gray-900 mb-4">¡Cupos restantes: 10!</p>
-                            <ul class="list-disc list-inside text-gray-900 text-left space-y-2 mb-4">
-                                <li>Instalación</li>
-                                <li>Compra del equipo</li>
-                                <li>1 año de servicios generales</li>
-                                <li>6 meses de garantía</li>
-                            </ul>
-                        </div>
-                        <div class="mt-6 text-center">
-                            <button class="agendar-btn bg-gray-900 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-800 transition duration-300" data-plan="Promoción Especial (Motos)">Adquirir promoción</button>
-                        </div>
-                    </div>
-                    <!-- Plan Premium -->
-                    <div class="bg-gray-800 p-8 rounded-xl shadow-2xl flex flex-col justify-between">
-                        <div>
-                            <h4 class="text-2xl font-bold text-center mb-2 text-white">Plan Premium</h4>
-                            <p class="text-4xl font-extrabold text-center mb-4 text-orange-500">$390.000</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2">
-                                <li>Instalación</li>
-                                <li>Compra del equipo</li>
-                                <li>Botón inmovilizador</li>
-                                <li>1 año de servicios generales</li>
-                                <li>2 años de garantía</li>
-                            </ul>
-                        </div>
-                        <div class="mt-6 text-center">
-                            <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan Premium (Motos)">Agenda tu cita</button>
-                        </div>
-                    </div>
-                    <!-- Plan VIP -->
-                    <div class="bg-gray-800 p-8 rounded-xl shadow-2xl flex flex-col justify-between">
-                        <div>
-                            <h4 class="text-2xl font-bold text-center mb-2 text-white">Plan VIP</h4>
-                            <p class="text-4xl font-extrabold text-center mb-4 text-orange-500">$470.000</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2">
-                                <li>Instalación y equipo</li>
-                                <li>1 año de servicios generales</li>
-                                <li>2 años de garantía</li>
-                                <li>Alarma de movimiento y de choque</li>
-                            </ul>
-                        </div>
-                        <div class="mt-6 text-center">
-                            <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan VIP (Motos)">Agenda tu cita</button>
-                        </div>
-                    </div>
-                    <!-- Plan VIP Proximidad -->
-                    <div class="bg-gray-800 p-8 rounded-xl shadow-2xl flex flex-col justify-between">
-                        <div>
-                            <h4 class="text-2xl font-bold text-center mb-2 text-white">Plan VIP Proximidad</h4>
-                            <p class="text-4xl font-extrabold text-center mb-4 text-orange-500">$570.000</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2">
-                                <li>Instalación y equipo</li>
-                                <li>1 año de servicios generales</li>
-                                <li>2 años de garantía</li>
-                                <li>Alarma con sensor de Proximidad</li>
-                            </ul>
-                        </div>
-                        <div class="mt-6 text-center">
-                            <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan VIP Proximidad (Motos)">Agenda tu cita</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sección de Planes para Automóviles -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-white mb-6">Planes para Automóviles</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Plan Básico Automóvil -->
-                    <div class="bg-gray-800 p-8 rounded-xl shadow-2xl flex flex-col justify-between">
-                        <div>
-                            <h4 class="text-2xl font-bold text-center mb-2 text-white">Plan Básico para Automóvil</h4>
-                            <p class="text-4xl font-extrabold text-center mb-4 text-orange-500">$330.000</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2">
-                                <li>Instalación</li>
-                                <li>Compra del equipo</li>
-                                <li>1 año de servicios generales</li>
-                                <li>6 meses de garantía</li>
-                            </ul>
-                        </div>
-                        <div class="mt-6 text-center">
-                            <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan Básico (Autos)">Agenda tu cita</button>
-                        </div>
-                    </div>
-                    <!-- Plan Premium Automóvil -->
-                    <div class="bg-gray-800 p-8 rounded-xl shadow-2xl flex flex-col justify-between">
-                        <div>
-                            <h4 class="text-2xl font-bold text-center mb-2 text-white">Plan Premium para Automóvil</h4>
-                            <p class="text-4xl font-extrabold text-center mb-4 text-orange-500">$390.000</p>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2">
-                                <li>Instalación</li>
-                                <li>Compra del equipo</li>
-                                <li>Botón inmovilizador</li>
-                                <li>1 año de servicios generales</li>
-                                <li>2 años de garantía</li>
-                            </ul>
-                        </div>
-                        <div class="mt-6 text-center">
-                            <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan Premium (Autos)">Agenda tu cita</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sección de Planes Empresariales -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-white mb-6">Plan para Empresas de Transporte de Carga</h3>
-                <div class="bg-orange-500 text-gray-900 p-8 rounded-xl shadow-2xl max-w-lg mx-auto">
-                    <p class="text-4xl font-extrabold text-center mb-4">$480.000</p>
-                    <ul class="list-disc list-inside space-y-2 text-gray-800">
-                        <li>Como dato: $150.000 (préstamo)</li>
-                        <li>Mensualidad: $40.000</li>
-                        <li>Botón de pánico</li>
-                        <li>Página de monitoreo</li>
-                        <li>Control T de carga</li>
-                    </ul>
-                </div>
-                <div class="mt-6 text-center">
-                    <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Plan Empresas de Carga">Agenda tu cita</button>
-                </div>
-            </div>
-            
-            <!-- Sección de Accesorios -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-white mb-6">Accesorios Adicionales</h3>
-                <div class="bg-gray-800 p-8 rounded-xl shadow-2xl max-w-lg mx-auto">
-                    <ul class="space-y-4">
-                        <li class="flex justify-between items-center text-gray-300">
-                            <span class="font-semibold">🖲️ Botón Inmovilizador</span>
-                            <span class="text-orange-500 font-bold">$40.000 Instalado</span>
-                        </li>
-                        <li class="flex justify-between items-center text-gray-300">
-                            <span class="font-semibold">⏰ Alarma de Movimiento y de Golpe</span>
-                            <span class="text-orange-500 font-bold">$280.000 Instalado</span>
-                        </li>
-                        <li class="flex justify-between items-center text-gray-300">
-                            <span class="font-semibold">🚨 Alarma con Sensor de Proximidad</span>
-                            <span class="text-orange-500 font-bold">$380.000 Instalado</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="mt-6 text-center">
-                    <button class="agendar-btn bg-gray-700 text-orange-500 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-gray-600 transition duration-300" data-plan="Accesorios">Agenda tu cita</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modal del formulario de cita -->
-    <div id="modal-form" class="fixed inset-0 z-50 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
-        <div class="bg-gray-800 p-8 rounded-xl shadow-2xl max-w-lg w-full mx-4">
-            <h3 class="text-2xl font-bold text-white mb-4">Agenda tu cita</h3>
-            <form id="agendar-form" class="space-y-4">
-                <div>
-                    <label for="modal-nombre" class="block text-sm font-medium text-gray-300">Nombre completo</label>
-                    <input type="text" id="modal-nombre" name="nombre" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
-                </div>
-                <div>
-                    <label for="modal-vehiculo" class="block text-sm font-medium text-gray-300">Marca y modelo del vehículo</label>
-                    <input type="text" id="modal-vehiculo" name="vehiculo" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
-                </div>
-                <div>
-                    <label for="modal-plan" class="block text-sm font-medium text-gray-300">Plan de Interés</label>
-                    <input type="text" id="modal-plan" name="plan" readonly class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm">
-                </div>
-                <div>
-                    <label for="modal-fecha" class="block text-sm font-medium text-gray-300">Fecha de instalación</label>
-                    <input type="date" id="modal-fecha" name="fecha" required class="mt-1 block w-full rounded-md border-gray-600 bg-gray-700 text-white shadow-sm focus:border-orange-500 focus:ring-orange-500">
-                </div>
-                <div class="flex justify-end space-x-4">
-                    <button type="button" id="cerrar-modal" class="bg-gray-700 text-white font-semibold py-2 px-6 rounded-md shadow-md hover:bg-gray-600 transition duration-300">Cerrar</button>
-                    <button type="submit" class="bg-orange-500 text-white font-semibold py-2 px-6 rounded-md shadow-lg hover:bg-orange-600 transition duration-300">Enviar por WhatsApp</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    
     <!-- Sección de Servicios Principales -->
     <section id="servicios-main" class="bg-gray-800 py-16">
         <div class="container mx-auto px-4">
