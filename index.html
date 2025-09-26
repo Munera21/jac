@@ -46,11 +46,12 @@
     <!-- Sección de la cabecera (Header) -->
     <header class="bg-gray-800 shadow-lg p-6 sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="#inicio" class="flex items-center space-x-4">
-                <img src="WhatsApp%20Image%202025-09-03%20at%2010.09.16.jpeg" alt="Logo de JAC GPS" class="h-10 w-auto">
+            <a href="#inicio" class="flex flex-col items-center">
+                <img src="A_digital_vector_graphic_features_a_circular_logo_.png" alt="Logo de JAC GPS" class="h-10 w-auto mb-1">
                 <span class="text-orange-500 font-bold text-lg">El control es tuyo, la acción es nuestra</span>
             </a>
-            <nav class="hidden md:flex space-x-6">
+            <!-- Se ha eliminado la clase `hidden md:flex` del elemento `nav` -->
+            <nav class="flex space-x-6">
                 <ul class="flex space-x-4 items-center">
                     <li><a href="#inicio" class="text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Inicio</a></li>
                     <li><a href="servicios.html" class="text-gray-300 hover:text-orange-500 transition duration-300 font-semibold" target="_blank">Servicios</a></li>
@@ -58,19 +59,9 @@
                     <li><a href="#contacto" class="bg-orange-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-orange-600 transition duration-300">Contacto</a></li>
                 </ul>
             </nav>
-            <button id="menu-toggle" class="md:hidden text-gray-300 hover:text-orange-500 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
+            <!-- Se ha eliminado el botón de menú móvil -->
         </div>
     </header>
-
-    <!-- Menú móvil -->
-    <div id="mobile-menu" class="hidden md:hidden bg-gray-800 shadow-md p-4 space-y-2">
-        <a href="#inicio" class="block text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Inicio</a>
-        <a href="servicios.html" class="block text-gray-300 hover:text-orange-500 transition duration-300 font-semibold" target="_blank">Servicios</a>
-        <a href="planes.html" class="block text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Planes</a>
-        <a href="#contacto" class="block text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Contacto</a>
-    </div>
 
     <!-- Sección principal (Hero) -->
     <main id="inicio" class="py-16 md:py-24 bg-cover bg-center">
@@ -172,7 +163,7 @@
         </div>
     </section>
     
-    <!-- Sección de Contacto -->
+    <!-- Sección de Contacto y Mapa -->
     <section id="contacto" class="py-16 bg-gray-900">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-6">Contáctanos</h2>
@@ -218,7 +209,7 @@
                 <h3 class="text-3xl font-bold text-white mb-6">¿Cómo Llegar?</h3>
                 <p class="text-lg text-gray-300 mb-4">Haz clic en el mapa para abrir Google Maps y obtener las indicaciones.</p>
                 <a href="https://www.google.com/maps/dir/?api=1&destination=1.848048,-76.043760" target="_blank" class="block w-full">
-                    <img src="8D464B06-48CB-41CF-A442-599335B4CD89.PNG" alt="Mapa de JAC GPS" class="max-w-4xl w-3/4 mx-auto rounded-xl shadow-lg">
+                    <img src="8D464B06-48CB-41CF-A442-599335B4CD89.PNG" alt="Mapa de JAC GPS" class="rounded-xl shadow-lg max-w-4xl mx-auto w-3/4">
                 </a>
                 <div class="mt-8 text-center text-gray-300">
                     <p>Estamos Ubicados en 📍: Cra 1 # 4-52, B/Los Lagos, Segundo piso, Pitalito SEGURO.</p>
@@ -253,6 +244,25 @@
                 window.addEventListener('resize', () => {
                     if (window.innerWidth >= 768) {
                         mobileMenu.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Lógica para el control de volumen del video
+            const video = document.getElementById('hero-video');
+            const volumeToggle = document.getElementById('volume-toggle');
+            const volumeOnIcon = document.getElementById('volume-on-icon');
+            const volumeOffIcon = document.getElementById('volume-off-icon');
+
+            if (video && volumeToggle) {
+                volumeToggle.addEventListener('click', () => {
+                    video.muted = !video.muted;
+                    if (video.muted) {
+                        volumeOnIcon.classList.add('hidden');
+                        volumeOffIcon.classList.remove('hidden');
+                    } else {
+                        volumeOnIcon.classList.remove('hidden');
+                        volumeOffIcon.classList.add('hidden');
                     }
                 });
             }
