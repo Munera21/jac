@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JAC GPS ofrece soluciones de rastreo, monitoreo e instalación de GPS para vehículos y motos en Pitalito, Fusagasugá, Medellín y Cali. Tecnología 4G y soporte local.">
+    
     <title>JAC GPS - Tu seguridad en Colombia</title>
-    <!-- Incluye el CDN de Tailwind CSS -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -38,23 +42,19 @@
             visibility: visible;
         }
     </style>
-    <!-- Incluye Font Awesome para iconos de redes sociales -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="bg-gray-900 text-gray-100 antialiased">
 
-    <!-- Sección de la cabecera (Header) -->
     <header class="bg-gray-800 shadow-lg p-6 sticky top-0 z-50">
         <div class="container mx-auto flex flex-col items-center">
             <a href="#inicio" class="flex flex-col items-center">
-                <img src="A_digital_vector_graphic_features_a_circular_logo_.png" alt="Logo de JAC GPS" class="h-10 w-auto mb-1">
+                <img src="A_digital_vector_graphic_features_a_circular_logo_.png" alt="Logo de JAC GPS" class="h-10 w-auto mb-1" width="40" height="40">
                 <span class="text-orange-500 font-bold text-lg text-center">El control es tuyo, la acción es nuestra</span>
             </a>
-            <!-- Se ha ajustado la barra de navegación para que esté debajo del logo y el lema -->
             <nav class="flex space-x-6 mt-4">
                 <ul class="flex space-x-4 items-center">
                     <li><a href="#inicio" class="text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Inicio</a></li>
-                    <li><a href="servicios.html" class="text-gray-300 hover:text-orange-500 transition duration-300 font-semibold" target="_blank">Servicios</a></li>
+                    <li><a href="servicios.html" class="text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Servicios</a></li>
                     <li><a href="planes.html" class="text-gray-300 hover:text-orange-500 transition duration-300 font-semibold">Planes</a></li>
                     <li><a href="#contacto" class="bg-orange-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-orange-600 transition duration-300">Contacto</a></li>
                 </ul>
@@ -62,25 +62,20 @@
         </div>
     </header>
 
-    <!-- Sección principal (Hero) -->
     <main id="inicio" class="py-16 md:py-24 bg-cover bg-center">
         <div class="container mx-auto px-4 text-center bg-gray-900 bg-opacity-80 rounded-lg p-8 shadow-2xl">
             <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">
                 JAC GPS: <span class="text-gradient">Tecnología y Seguridad</span> en tus manos
             </h1>
-            <!-- Contenedor del video -->
             <div class="relative mt-8 mb-8">
                 <video id="hero-video" class="w-3/4 mx-auto rounded-xl shadow-lg max-w-4xl" autoplay loop muted playsinline>
                     <source src="https://res.cloudinary.com/dwad3m99i/video/upload/v1758830727/AQMDPOzZAaonk4oviGtFidgJUI8T13jBlvefBIuRMvPnwNV7BHju0oFsbilbO4oVThmphWUswWV-GRjhZmvwfVYp6G45OAGNXHZ98Cw_bleiza.mp4" type="video/mp4">
                     Tu navegador no soporta el video.
                 </video>
-                <!-- Botón de control de volumen -->
                 <button id="volume-toggle" class="absolute bottom-4 right-4 bg-gray-900 bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75 transition-all">
-                    <!-- Icono de altavoz silenciado -->
                     <svg id="volume-off-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M9.383 3.093A1 1 0 0110 3v14a1 1 0 01-1.707.707L5.454 13.5a1 1 0 00-.707-.293H3a1 1 0 01-1-1v-4a1 1 0 011-1h1.747a1 1 0 00.707-.293l2.843-2.843a1 1 0 011.086-.271zM14.47 7.027a1 1 0 011.066.892 5 5 0 010 4.162 1 1 0 01-1.066.892 7 7 0 00-6.491-6.491z" clip-rule="evenodd"></path>
                     </svg>
-                    <!-- Icono de altavoz normal (inicialmente oculto) -->
                     <svg id="volume-on-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M9.383 3.093A1 1 0 0110 3v14a1 1 0 01-1.707.707L5.454 13.5a1 1 0 00-.707-.293H3a1 1 0 01-1-1v-4a1 1 0 011-1h1.747a1 1 0 00.707-.293l2.843-2.843a1 1 0 011.086-.271zM14.47 7.027a1 1 0 011.066.892 5 5 0 010 4.162 1 1 0 01-1.066.892 7 7 0 00-6.491-6.491z" clip-rule="evenodd"></path>
                     </svg>
@@ -95,12 +90,10 @@
         </div>
     </main>
 
-    <!-- Sección de Servicios Principales -->
     <section id="servicios-main" class="bg-gray-800 py-16">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">Nuestros Servicios Principales</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Tarjeta de servicio 1 -->
                 <div class="bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
                     <div class="text-orange-500 text-5xl mb-4 text-center">🛰️</div>
                     <h3 class="text-2xl font-bold text-white mb-2 text-center">Rastreo y Monitoreo</h3>
@@ -108,7 +101,6 @@
                         Sistema de última generación con tecnología 4G. Ubicación en tiempo real, alertas y historial de recorridos.
                     </p>
                 </div>
-                <!-- Tarjeta de servicio 2 -->
                 <div class="bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
                     <div class="text-orange-500 text-5xl mb-4 text-center">🔧</div>
                     <h3 class="text-2xl font-bold text-white mb-2 text-center">Instalación Profesional</h3>
@@ -116,7 +108,6 @@
                         Instalación clara y correcta, difícil de acceder para los malhechores. Sin pérdida de la garantía eléctrica de tu vehículo.
                     </p>
                 </div>
-                <!-- Tarjeta de servicio 3 -->
                 <div class="bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
                     <div class="text-orange-500 text-5xl mb-4 text-center">👮</div>
                     <h3 class="text-2xl font-bold text-white mb-2 text-center">Equipo de Reacción Local</h3>
@@ -128,7 +119,6 @@
         </div>
     </section>
 
-    <!-- Sección de Por qué elegirnos -->
     <section class="bg-gray-800 py-16">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">¿Por qué JAC GPS?</h2>
@@ -149,7 +139,6 @@
         </div>
     </section>
     
-    <!-- Sección de Demostración -->
     <section id="demostracion" class="py-16 bg-gray-800">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Demostración en Video</h2>
@@ -162,13 +151,11 @@
         </div>
     </section>
     
-    <!-- Sección de Contacto y Mapa -->
     <section id="contacto" class="py-16 bg-gray-900">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-6">Contáctanos</h2>
             <div class="bg-gray-800 p-8 rounded-xl shadow-2xl mb-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center md:text-left">
-                    <!-- Información de contacto -->
                     <div>
                         <h3 class="text-2xl font-bold text-orange-500 mb-4">Información</h3>
                         <ul class="space-y-4">
@@ -186,7 +173,6 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- Redes sociales -->
                     <div>
                         <h3 class="text-2xl font-bold text-orange-500 mb-4">Nuestras Redes</h3>
                         <ul class="space-y-4">
@@ -203,7 +189,6 @@
                 </div>
             </div>
 
-            <!-- Sección de ¿Cómo Llegar? -->
             <div class="text-center text-gray-300">
                 <h3 class="text-3xl font-bold text-white mb-6">¿Cómo Llegar?</h3>
                 <p class="text-lg text-gray-300 mb-4">Haz clic en el mapa para abrir Google Maps y obtener las indicaciones.</p>
@@ -217,10 +202,9 @@
         </div>
     </section>
 
-    <!-- Pie de página (Footer) -->
     <footer class="bg-gray-900 text-white py-8">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 JAC GPS. Todos los derechos reservados.</p>
+            <p>© 2024 JAC GPS. Todos los derechos reservados.</p>
         </div>
     </footer>
     <script>
