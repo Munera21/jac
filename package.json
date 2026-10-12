@@ -1,9 +1,0 @@
-{
-    "name": "santuario-mistico",
-    "version": "1.0.0",
-    "private": true,
-    "description": "Landing page de Santuario Místico: guía espiritual y servicios esotéricos.",
-    "scripts": {
-        "test": "node --test"
-    }
-}
